@@ -7,14 +7,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CodingExamB {
-	/*
+	static /*
 	 * This is a logging program for collecting TODO comments in a program. The program will scan
 	 * Through all the files in the Coding_Exam_B/classes package, and collect all the comments that start
 	 * with //TODO: and write them to their own file. See the TODO_Log_example.txt file for an idea of what 
 	 * the final file output will look like.
 	 */
-	
-	
+	String line;
+	static String s;
+	static int lineNum;
 	public static String getLoggingInfo(String fileName) {
 		/*
 		 * 1. Complete the getLoggingInfoMethod.
@@ -24,11 +25,37 @@ public class CodingExamB {
 		 *    into one large String. The string will also state the file name and
 		 *    the line number for where each TODO was found. 
 		*/
-		
-		return "";
-	}
+		try {
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+for (int i = 0; i < br.lines().count(); i++) {
 	
-	public static void main(String[] args) {
+
+		line = br.readLine();
+}
+		s = "";
+		String t = "//TODO:";
+		int lineNum = 1;
+	
+		while(line!=null) {
+		for (int j = 0; j < line.length(); j++) {
+		
+		if(line.contains(t)) {
+			s += line;
+		}
+	
+			
+		}
+		}}
+
+		
+		
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		return lineNum + "" +line;
+}
+	
+	public static void main(String[] args) throws IOException {
 		String finalLogString = getLoggingInfo("src/Coding_Exam_B/classes/Camera.java");
 		finalLogString += getLoggingInfo("src/Coding_Exam_B/classes/RayTracedImageViewer.java");
 		finalLogString += getLoggingInfo("src/Coding_Exam_B/classes/RayTracer.java");
@@ -37,6 +64,8 @@ public class CodingExamB {
 		/*
 		 * 2. Write the finalLogString to a file called TODO_Log.txt. The file should match TODO_Log_example.txt. 
 		 */
-
+FileWriter fw = new FileWriter("src/TODO_Log.txt");
+fw.write(finalLogString);
+System.out.println(finalLogString);
 	}
 }
